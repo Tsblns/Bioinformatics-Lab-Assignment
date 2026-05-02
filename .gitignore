@@ -1,0 +1,8 @@
+原始实验数据/
+outputs_window3/extracted_inputs/原始实验数据/
+*.gz
+*.tar
+*.zip
+*.bed
+*.bam
+*.vcf

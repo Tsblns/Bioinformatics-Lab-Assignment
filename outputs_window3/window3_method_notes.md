@@ -212,5 +212,120 @@ X_nonnegative = X_cnv_selected + 2
 8. 额外完成 CNV-NMF 轻量增强版，给后续窗口提供可选输入。
 9. 生成筛选记录、解释率图、rank 比较表和日志，保证处理过程可复核。
 
+
+## 九、如何运行和复现窗口3
+
+### 1. 推荐项目目录结构
+
+运行前建议保持如下目录结构：
+
+```text
+Bioinformatics-Lab-Assignment/
+  ├─ run_window3.py
+  ├─ 2txt创新点改进.md
+  ├─ window1_outputs/
+  │   ├─ master_samples_6omics.csv
+  │   ├─ sample_presence_6omics.csv
+  │   ├─ preprocess_rules.md
+  │   └─ window_input_spec.md
+  └─ 原始实验数据/
+      ├─ TCGA.STAD.sampleMap_Gistic2_CopyNumber_Gistic2_all_thresholded.by_genes.gz
+      └─ mc3_gene_level_STAD_mc3_gene_level.txt.gz
+```
+
+其中 `outputs_window3/` 不需要提前准备，脚本运行后会自动创建。
+
+### 2. 必须准备的输入文件
+
+运行 `run_window3.py` 前，至少需要准备以下文件：
+
+| 文件 | 建议放置位置 | 说明 |
+|---|---|---|
+| `master_samples_6omics.csv` | `window1_outputs/` | 窗口1生成的六组学共同样本表，本窗口严格以它为准 |
+| `sample_presence_6omics.csv` | `window1_outputs/` | 窗口1生成的样本存在表，用于记录和核对 |
+| `preprocess_rules.md` | `window1_outputs/` | 窗口1给出的预处理规则 |
+| `window_input_spec.md` | `window1_outputs/` | 后续窗口输入格式规范 |
+| `TCGA.STAD.sampleMap_Gistic2_CopyNumber_Gistic2_all_thresholded.by_genes.gz` | `原始实验数据/` | CNV GISTIC thresholded 原始压缩文件 |
+| `mc3_gene_level_STAD_mc3_gene_level.txt.gz` | `原始实验数据/` | mutation gene-level 原始压缩文件 |
+| `2txt创新点改进.md` | 项目根目录 | 项目创新点和改进说明 |
+
+脚本会递归查找这些文件，所以文件名略有前后缀差异时通常也能识别；但最稳妥的方式是按上面的目录和文件名放置。
+
+### 3. 关于大文件和 GitHub
+
+`outputs_window3/extracted_inputs/` 是脚本运行时自动生成的本地临时解压目录，里面是从 `.gz` 文件解压出来的 CNV 和 mutation 原始文本文件，体积较大，不建议上传 GitHub。
+
+提交 GitHub 时建议保留：
+
+- `run_window3.py`
+- `outputs_window3/window3_method_notes.md`
+- `outputs_window3/cnv/` 中的结果文件
+- `outputs_window3/mutation/` 中的结果文件
+- `outputs_window3/enhanced/` 中的结果文件
+- `outputs_window3/figures/` 和 `outputs_window3/logs/` 中必要的图和日志
+
+可以不提交：
+
+- `outputs_window3/extracted_inputs/`
+
+如果之后要复现，只要原始 `.gz` 文件还在 `原始实验数据/` 目录下，重新运行脚本即可自动恢复 `extracted_inputs/`。
+
+### 4. 运行命令
+
+在项目根目录打开终端运行：
+
+```powershell
+python run_window3.py
+```
+
+如果当前终端不在项目根目录，请先进入项目根目录。示例：
+
+```powershell
+cd Bioinformatics-Lab-Assignment
+python run_window3.py
+```
+
+如果默认 `python` 缺少依赖，可以换用自己环境中已经安装 `pandas`、`numpy`、`openpyxl`、`Pillow` 的 Python 解释器运行。脚本中 PCA、SVD、NMF 已提供 `numpy` 实现，不强制依赖 `scikit-learn`。
+
+### 5. 脚本运行后会生成什么
+
+运行完成后，脚本会自动生成或更新：
+
+```text
+outputs_window3/
+  ├─ cnv/
+  │   ├─ cnv_processed_6omics.csv
+  │   ├─ cnv_pca_6omics.csv
+  │   └─ cnv_feature_variance_top.xlsx
+  ├─ mutation/
+  │   ├─ mutation_processed_6omics.csv
+  │   ├─ mutation_processed_freq1pct.csv
+  │   ├─ mutation_embedding_6omics.csv
+  │   └─ mutation_frequency_summary.xlsx
+  ├─ enhanced/
+  │   ├─ cnv_nmf_embedding_6omics.csv
+  │   └─ cnv_nmf_rank_comparison.xlsx
+  ├─ figures/
+  │   └─ cnv_pca_explained_variance.png
+  ├─ logs/
+  ├─ extracted_inputs/
+  └─ window3_method_notes.md
+```
+
+运行结束时，终端会打印共同样本数、CNV 主输出维度、mutation 主输出维度、NMF 是否成功、输出目录以及推荐给窗口5的文件名。
+
+### 6. 最推荐交给后续窗口的文件
+
+后续窗口优先使用：
+
+- `outputs_window3/cnv/cnv_pca_6omics.csv`
+- `outputs_window3/mutation/mutation_embedding_6omics.csv`
+
+可选增强输入：
+
+- `outputs_window3/enhanced/cnv_nmf_embedding_6omics.csv`
+
 结论：窗口3“CNV + mutation 预处理”内容已经完成，产物可以交给后续窗口继续使用。
+
+
 

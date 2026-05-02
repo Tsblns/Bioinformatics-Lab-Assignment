@@ -16,11 +16,13 @@
 | 六组学样本存在表 | `window1_outputs/sample_presence_6omics.csv` |
 | 预处理规则 | `window1_outputs/preprocess_rules.md` |
 | 后续窗口输入规范 | `window1_outputs/window_input_spec.md` |
-| CNV 原始文件 | `outputs_window3/extracted_inputs/原始实验数据/TCGA.STAD.sampleMap_Gistic2_CopyNumber_Gistic2_all_thresholded.by_genes` |
-| mutation 原始文件 | `outputs_window3/extracted_inputs/原始实验数据/mc3_gene_level_STAD_mc3_gene_level.txt` |
+| CNV 原始文件 | 本地运行时由 `原始实验数据/TCGA.STAD.sampleMap_Gistic2_CopyNumber_Gistic2_all_thresholded.by_genes.gz` 解压得到 |
+| mutation 原始文件 | 本地运行时由 `原始实验数据/mc3_gene_level_STAD_mc3_gene_level.txt.gz` 解压得到 |
 | 创新点说明 | `2txt创新点改进.md` |
 
-原始 CNV 和 mutation 文件来自 `原始实验数据/` 中的 `.gz` 压缩文件，脚本已自动解压到 `outputs_window3/extracted_inputs/` 后再读取。
+原始 CNV 和 mutation 文件来自 `原始实验数据/` 中的 `.gz` 压缩文件。脚本运行时会自动解压到 `outputs_window3/extracted_inputs/` 后再读取。
+
+注意：`outputs_window3/extracted_inputs/` 是本地临时解压目录，里面的文件体积较大，不适合上传 GitHub。提交仓库时可以不上传该目录；需要复现时，保留原始 `.gz` 数据和 `run_window3.py`，重新运行脚本即可再次生成该临时目录和后续结果。
 
 ## 二、共同样本处理
 
@@ -201,7 +203,7 @@ X_nonnegative = X_cnv_selected + 2
 本窗口完成了以下贡献：
 
 1. 自动定位并读取窗口1输出和原始 CNV / mutation 文件。
-2. 自动解压 CNV 和 mutation 的 `.gz` 文件，并保留解压后的可追溯输入。
+2. 自动解压 CNV 和 mutation 的 `.gz` 文件到本地临时目录 `outputs_window3/extracted_inputs/`，用于运行时读取；该目录因文件过大不建议提交到 GitHub。
 3. 严格使用 `master_samples_6omics.csv`，没有重新取交集，也没有重做窗口1。
 4. 将 CNV 和 mutation 都整理为统一格式：行 = 样本，列 = 特征。
 5. 保证样本顺序与 master 表一致，便于后续窗口直接拼接。
@@ -211,3 +213,4 @@ X_nonnegative = X_cnv_selected + 2
 9. 生成筛选记录、解释率图、rank 比较表和日志，保证处理过程可复核。
 
 结论：窗口3“CNV + mutation 预处理”内容已经完成，产物可以交给后续窗口继续使用。
+

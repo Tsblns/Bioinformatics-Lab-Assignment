@@ -1,1 +1,4 @@
 TCGA.STAD.sampleMap_HumanMethylation450 filter=lfs diff=lfs merge=lfs -text
+HumanMethylation450 filter=lfs diff=lfs merge=lfs -text
+HiSeqV2 filter=lfs diff=lfs merge=lfs -text
+*.gz filter=lfs diff=lfs merge=lfs -text

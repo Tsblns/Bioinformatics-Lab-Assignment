@@ -7,3 +7,4 @@
 *.vcf
 原始实验数据/*.gz
 原始实验数据/TCGA.STAD.sampleMap_HumanMethylation450.gz
+原始实验数据/

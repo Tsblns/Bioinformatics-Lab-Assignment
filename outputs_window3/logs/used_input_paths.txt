@@ -1,0 +1,7 @@
+master: C:\Users\zebli\Desktop\大三下\生物信息\数据清点 - 样本对齐 - 共同样本表 - 后续输入规范\window1_outputs\master_samples_6omics.csv
+presence: C:\Users\zebli\Desktop\大三下\生物信息\数据清点 - 样本对齐 - 共同样本表 - 后续输入规范\window1_outputs\sample_presence_6omics.csv
+rules: C:\Users\zebli\Desktop\大三下\生物信息\数据清点 - 样本对齐 - 共同样本表 - 后续输入规范\window1_outputs\preprocess_rules.md
+spec: C:\Users\zebli\Desktop\大三下\生物信息\数据清点 - 样本对齐 - 共同样本表 - 后续输入规范\window1_outputs\window_input_spec.md
+cnv: C:\Users\zebli\Desktop\大三下\生物信息\数据清点 - 样本对齐 - 共同样本表 - 后续输入规范\outputs_window3\extracted_inputs\原始实验数据\TCGA.STAD.sampleMap_Gistic2_CopyNumber_Gistic2_all_thresholded.by_genes
+mutation: C:\Users\zebli\Desktop\大三下\生物信息\数据清点 - 样本对齐 - 共同样本表 - 后续输入规范\outputs_window3\extracted_inputs\原始实验数据\mc3_gene_level_STAD_mc3_gene_level.txt
+innovation: C:\Users\zebli\Desktop\大三下\生物信息\数据清点 - 样本对齐 - 共同样本表 - 后续输入规范\2txt创新点改进.md

@@ -1,0 +1,9 @@
+窗口3执行完成
+1. 实际共同样本数: 288
+2. CNV 主输出维度: 288 x 30 (cnv_pca_6omics.csv); 筛选特征矩阵 288 x 3000
+3. mutation 主输出维度: 288 x 16653 (mutation_processed_6omics.csv); embedding 288 x 8
+4. 是否成功生成 NMF 增强版: 是 (rank=15)
+5. 输出目录路径: C:\Users\zebli\Desktop\大三下\生物信息\数据清点 - 样本对齐 - 共同样本表 - 后续输入规范\outputs_window3
+6. 给窗口5推荐使用的文件名:
+   baseline: cnv_pca_6omics.csv, mutation_embedding_6omics.csv
+   optional enhanced: cnv_nmf_embedding_6omics.csv

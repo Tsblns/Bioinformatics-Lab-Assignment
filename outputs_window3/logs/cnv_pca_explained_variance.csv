@@ -1,0 +1,4 @@
+﻿n_components,cumulative_explained_variance,feasible
+20,0.8274674726837095,True
+30,0.8853727008619504,True
+50,0.9382203352318323,True
